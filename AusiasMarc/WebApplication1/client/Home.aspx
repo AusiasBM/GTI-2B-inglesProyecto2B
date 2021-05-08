@@ -10,7 +10,11 @@
 <body>
     <form id="form1" runat="server">
         <div>
+
         </div>
-        CLIENT</form>
+        <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+        <br/>
+        <asp:ListBox ID="Reservas" runat="server" Height="427px" Width="506px"></asp:ListBox>
+    </form>
 </body>
 </html>

@@ -19,34 +19,51 @@ namespace WebApplication1
         }
         protected void Button1_Click(object sender, EventArgs e)
         {
-            
-            int user = Int32.Parse(TextBox1.Text);
+            try{
+                int user = Int32.Parse(TextBox1.Text);
 
-            dt = ws.LoginRecepcionist(user);
+                dt = ws.LoginRecepcionist(user);
 
-            foreach (DataRow dr in dt.Rows)
-            {
-                if (TextBox2.Text == dr["pass"].ToString())
+                foreach (DataRow dr in dt.Rows)
                 {
-                    Response.Redirect("./admin/Home.aspx");
+                    if (TextBox2.Text == dr["pass"].ToString())
+                    {
+                        //ws.setId(Int32.Parse(dr["idn"].ToString()));
+                        Response.Redirect("./admin/Home.aspx?id=" + dr["id"].ToString());
+                    }
                 }
             }
+            catch(Exception)
+            {
+
+            }
+
+            
         }
 
         protected void Button2_Click(object sender, EventArgs e)
         {
-            
-            int user = Int32.Parse(TextBox3.Text);
-
-            dt = ws.LoginClient(user);
-
-            foreach (DataRow dr in dt.Rows)
+            try
             {
-                if (TextBox4.Text == dr["pass"].ToString()){
-                    Response.Redirect("./client/Home.aspx");
+                int user = Int32.Parse(TextBox3.Text);
+
+                dt = ws.LoginClient(user);
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    if (TextBox4.Text == dr["pass"].ToString())
+                    {
+                        Response.Redirect("./client/Home.aspx?id=" + dr["id"].ToString());
+                    }
+
                 }
-                
             }
+            catch (Exception)
+            {
+
+            }
+            
+
         }
     }
 }

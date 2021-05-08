@@ -2,6 +2,26 @@
 <wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="setId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="setIdResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="getId">
+        <s:complexType />
+      </s:element>
+      <s:element name="getIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="getIdResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="HelloWorld">
         <s:complexType />
       </s:element>
@@ -54,8 +74,62 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="DataRecepcionist">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DataRecepcionistResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DataRecepcionistResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DataClient">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DataClientResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DataClientResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
+  <wsdl:message name="setIdSoapIn">
+    <wsdl:part name="parameters" element="tns:setId" />
+  </wsdl:message>
+  <wsdl:message name="setIdSoapOut">
+    <wsdl:part name="parameters" element="tns:setIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="getIdSoapIn">
+    <wsdl:part name="parameters" element="tns:getId" />
+  </wsdl:message>
+  <wsdl:message name="getIdSoapOut">
+    <wsdl:part name="parameters" element="tns:getIdResponse" />
+  </wsdl:message>
   <wsdl:message name="HelloWorldSoapIn">
     <wsdl:part name="parameters" element="tns:HelloWorld" />
   </wsdl:message>
@@ -74,7 +148,27 @@
   <wsdl:message name="LoginClientSoapOut">
     <wsdl:part name="parameters" element="tns:LoginClientResponse" />
   </wsdl:message>
+  <wsdl:message name="DataRecepcionistSoapIn">
+    <wsdl:part name="parameters" element="tns:DataRecepcionist" />
+  </wsdl:message>
+  <wsdl:message name="DataRecepcionistSoapOut">
+    <wsdl:part name="parameters" element="tns:DataRecepcionistResponse" />
+  </wsdl:message>
+  <wsdl:message name="DataClientSoapIn">
+    <wsdl:part name="parameters" element="tns:DataClient" />
+  </wsdl:message>
+  <wsdl:message name="DataClientSoapOut">
+    <wsdl:part name="parameters" element="tns:DataClientResponse" />
+  </wsdl:message>
   <wsdl:portType name="WebService1Soap">
+    <wsdl:operation name="setId">
+      <wsdl:input message="tns:setIdSoapIn" />
+      <wsdl:output message="tns:setIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getId">
+      <wsdl:input message="tns:getIdSoapIn" />
+      <wsdl:output message="tns:getIdSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="HelloWorld">
       <wsdl:input message="tns:HelloWorldSoapIn" />
       <wsdl:output message="tns:HelloWorldSoapOut" />
@@ -87,9 +181,35 @@
       <wsdl:input message="tns:LoginClientSoapIn" />
       <wsdl:output message="tns:LoginClientSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="DataRecepcionist">
+      <wsdl:input message="tns:DataRecepcionistSoapIn" />
+      <wsdl:output message="tns:DataRecepcionistSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DataClient">
+      <wsdl:input message="tns:DataClientSoapIn" />
+      <wsdl:output message="tns:DataClientSoapOut" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WebService1Soap" type="tns:WebService1Soap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="setId">
+      <soap:operation soapAction="http://tempuri.org/setId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getId">
+      <soap:operation soapAction="http://tempuri.org/getId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="HelloWorld">
       <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
       <wsdl:input>
@@ -117,9 +237,45 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="DataRecepcionist">
+      <soap:operation soapAction="http://tempuri.org/DataRecepcionist" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DataClient">
+      <soap:operation soapAction="http://tempuri.org/DataClient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="WebService1Soap12" type="tns:WebService1Soap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="setId">
+      <soap12:operation soapAction="http://tempuri.org/setId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getId">
+      <soap12:operation soapAction="http://tempuri.org/getId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="HelloWorld">
       <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
       <wsdl:input>
@@ -140,6 +296,24 @@
     </wsdl:operation>
     <wsdl:operation name="LoginClient">
       <soap12:operation soapAction="http://tempuri.org/LoginClient" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DataRecepcionist">
+      <soap12:operation soapAction="http://tempuri.org/DataRecepcionist" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DataClient">
+      <soap12:operation soapAction="http://tempuri.org/DataClient" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
