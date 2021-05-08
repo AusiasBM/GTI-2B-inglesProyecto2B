@@ -116,6 +116,27 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="DataReserve">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DataReserveResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DataReserveResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="setIdSoapIn">
@@ -160,6 +181,12 @@
   <wsdl:message name="DataClientSoapOut">
     <wsdl:part name="parameters" element="tns:DataClientResponse" />
   </wsdl:message>
+  <wsdl:message name="DataReserveSoapIn">
+    <wsdl:part name="parameters" element="tns:DataReserve" />
+  </wsdl:message>
+  <wsdl:message name="DataReserveSoapOut">
+    <wsdl:part name="parameters" element="tns:DataReserveResponse" />
+  </wsdl:message>
   <wsdl:portType name="WebService1Soap">
     <wsdl:operation name="setId">
       <wsdl:input message="tns:setIdSoapIn" />
@@ -188,6 +215,10 @@
     <wsdl:operation name="DataClient">
       <wsdl:input message="tns:DataClientSoapIn" />
       <wsdl:output message="tns:DataClientSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DataReserve">
+      <wsdl:input message="tns:DataReserveSoapIn" />
+      <wsdl:output message="tns:DataReserveSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WebService1Soap" type="tns:WebService1Soap">
@@ -255,6 +286,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="DataReserve">
+      <soap:operation soapAction="http://tempuri.org/DataReserve" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="WebService1Soap12" type="tns:WebService1Soap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -314,6 +354,15 @@
     </wsdl:operation>
     <wsdl:operation name="DataClient">
       <soap12:operation soapAction="http://tempuri.org/DataClient" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DataReserve">
+      <soap12:operation soapAction="http://tempuri.org/DataReserve" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

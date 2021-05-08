@@ -112,5 +112,23 @@ namespace AusiasMarc
             }
             return dt;
         }
+
+        [WebMethod]
+        public DataTable DataReserve(int id)
+        {
+            DataTable dt = new DataTable();
+
+            SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;");
+
+            conn.Open();
+            using (conn)
+            {
+                SQLiteCommand comm = new SQLiteCommand("SELECT * FROM Reserve WHERE idClient='" + id + "'", conn);
+                SQLiteDataReader reader = comm.ExecuteReader();
+                dt.Load(reader);
+                reader.Close();
+            }
+            return dt;
+        }
     }
 }

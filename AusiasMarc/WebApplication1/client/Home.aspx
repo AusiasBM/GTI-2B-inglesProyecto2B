@@ -14,7 +14,7 @@
         </div>
         <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
         <br/>
-        <asp:ListBox ID="Reservas" runat="server" Height="427px" Width="506px"></asp:ListBox>
+        <asp:ListBox ID="Reservas" runat="server" Height="427px" Width="506px" style="margin-right: 0px"></asp:ListBox>
     </form>
 </body>
 </html>

@@ -14,10 +14,11 @@ namespace WebApplication1.client
         public DataTable dt = new DataTable();
         public string DBpath = HttpRuntime.AppDomainAppPath + "dataBase.db";
         public WebService1 ws;
-        String id;
+        String id, nameClient;
+
 
         protected void Page_Load(object sender, EventArgs e)
-        {
+        { 
             ws = new WebService1();
             this.id = String.IsNullOrEmpty(Request.QueryString["id"]) ? "" : Request.QueryString["id"].ToString();
 
@@ -26,8 +27,31 @@ namespace WebApplication1.client
             foreach (DataRow dr in dt.Rows)
             {
                 Label1.Text = dr["idn"].ToString();
-                Label1.Text += " " + dr["name"].ToString();
-                Label1.Text += " " + dr["surname"].ToString();
+                nameClient= dr["name"].ToString();
+                Label1.Text += " " + nameClient + " " + dr["surname"].ToString();
+            }
+
+            dt = ws.DataReserve(Int32.Parse(id));
+
+            String reserve;
+
+            foreach (DataRow dr in dt.Rows)
+            {
+
+                reserve = nameClient + "\t";
+
+                dt = ws.DataRecepcionist(Int32.Parse(dr["idRecepcionist"].ToString()));
+
+                foreach (DataRow dr1 in dt.Rows)
+                {
+                    reserve += dr1["name"].ToString() + "\t";
+                }
+
+                reserve += dr["arrivalDate"].ToString() + "\t";
+                reserve += dr["finishDate"].ToString() + "\t";
+                reserve += dr["typeRoom"].ToString() + "\t";
+
+                Reservas.Items.Add(reserve);
             }
         }
     }

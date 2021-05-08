@@ -44,6 +44,8 @@ namespace WebApplication1.localhost {
         
         private System.Threading.SendOrPostCallback DataClientOperationCompleted;
         
+        private System.Threading.SendOrPostCallback DataReserveOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -102,6 +104,9 @@ namespace WebApplication1.localhost {
         
         /// <remarks/>
         public event DataClientCompletedEventHandler DataClientCompleted;
+        
+        /// <remarks/>
+        public event DataReserveCompletedEventHandler DataReserveCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/setId", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -302,6 +307,35 @@ namespace WebApplication1.localhost {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/DataReserve", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataTable DataReserve(int id) {
+            object[] results = this.Invoke("DataReserve", new object[] {
+                        id});
+            return ((System.Data.DataTable)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void DataReserveAsync(int id) {
+            this.DataReserveAsync(id, null);
+        }
+        
+        /// <remarks/>
+        public void DataReserveAsync(int id, object userState) {
+            if ((this.DataReserveOperationCompleted == null)) {
+                this.DataReserveOperationCompleted = new System.Threading.SendOrPostCallback(this.OnDataReserveOperationCompleted);
+            }
+            this.InvokeAsync("DataReserve", new object[] {
+                        id}, this.DataReserveOperationCompleted, userState);
+        }
+        
+        private void OnDataReserveOperationCompleted(object arg) {
+            if ((this.DataReserveCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.DataReserveCompleted(this, new DataReserveCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -467,6 +501,32 @@ namespace WebApplication1.localhost {
         private object[] results;
         
         internal DataClientCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataTable Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataTable)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void DataReserveCompletedEventHandler(object sender, DataReserveCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class DataReserveCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal DataReserveCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
