@@ -115,3 +115,5 @@ C:\Users\AusiasBM\Desktop\ingles\AusiasMarc\WebApplication1\obj\Debug\WebApplica
 C:\Users\AusiasBM\Desktop\ingles\AusiasMarc\WebApplication1\obj\Debug\WebApplication1.csproj.CopyComplete
 C:\Users\AusiasBM\Desktop\ingles\AusiasMarc\WebApplication1\obj\Debug\WebApplication1.dll
 C:\Users\AusiasBM\Desktop\ingles\AusiasMarc\WebApplication1\obj\Debug\WebApplication1.pdb
+C:\Users\AusiasBM\Desktop\ingles\AusiasMarc\WebApplication1\bin\System.Data.SQLite.dll
+C:\Users\AusiasBM\Desktop\ingles\AusiasMarc\WebApplication1\bin\System.Data.SQLite.xml
