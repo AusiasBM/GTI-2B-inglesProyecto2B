@@ -31,7 +31,7 @@ namespace WebApplication1.client
                 Label1.Text += " " + nameClient + " " + dr["surname"].ToString();
             }
 
-            dt = ws.DataReserve(Int32.Parse(id));
+            dt = ws.DataReserve(Int32.Parse(id), 0);
 
             String reserve;
 
