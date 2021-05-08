@@ -29,7 +29,7 @@ namespace AusiasMarc
         }
 
         [WebMethod]
-        public DataTable Login(int user)
+        public DataTable LoginRecepcionist(int idn)
         {
             DataTable dt = new DataTable();
             
@@ -38,7 +38,25 @@ namespace AusiasMarc
             conn.Open();
             using (conn)
             {
-                SQLiteCommand comm = new SQLiteCommand("SELECT * FROM Client WHERE idn='" + user + "'", conn);
+                SQLiteCommand comm = new SQLiteCommand("SELECT * FROM Recepcionist WHERE idn='" + idn + "'", conn);
+                SQLiteDataReader reader = comm.ExecuteReader();
+                dt.Load(reader);
+                reader.Close();
+            }
+            return dt;
+        }
+
+        [WebMethod]
+        public DataTable LoginClient(int idn)
+        {
+            DataTable dt = new DataTable();
+
+            SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;");
+
+            conn.Open();
+            using (conn)
+            {
+                SQLiteCommand comm = new SQLiteCommand("SELECT * FROM Client WHERE idn='" + idn + "'", conn);
                 SQLiteDataReader reader = comm.ExecuteReader();
                 dt.Load(reader);
                 reader.Close();

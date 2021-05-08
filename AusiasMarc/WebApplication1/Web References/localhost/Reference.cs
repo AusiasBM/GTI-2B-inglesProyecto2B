@@ -32,7 +32,9 @@ namespace WebApplication1.localhost {
         
         private System.Threading.SendOrPostCallback HelloWorldOperationCompleted;
         
-        private System.Threading.SendOrPostCallback LoginOperationCompleted;
+        private System.Threading.SendOrPostCallback LoginRecepcionistOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback LoginClientOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -76,7 +78,10 @@ namespace WebApplication1.localhost {
         public event HelloWorldCompletedEventHandler HelloWorldCompleted;
         
         /// <remarks/>
-        public event LoginCompletedEventHandler LoginCompleted;
+        public event LoginRecepcionistCompletedEventHandler LoginRecepcionistCompleted;
+        
+        /// <remarks/>
+        public event LoginClientCompletedEventHandler LoginClientCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/HelloWorld", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -106,31 +111,60 @@ namespace WebApplication1.localhost {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/Login", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public System.Data.DataTable Login(int user) {
-            object[] results = this.Invoke("Login", new object[] {
-                        user});
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/LoginRecepcionist", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataTable LoginRecepcionist(int idn) {
+            object[] results = this.Invoke("LoginRecepcionist", new object[] {
+                        idn});
             return ((System.Data.DataTable)(results[0]));
         }
         
         /// <remarks/>
-        public void LoginAsync(int user) {
-            this.LoginAsync(user, null);
+        public void LoginRecepcionistAsync(int idn) {
+            this.LoginRecepcionistAsync(idn, null);
         }
         
         /// <remarks/>
-        public void LoginAsync(int user, object userState) {
-            if ((this.LoginOperationCompleted == null)) {
-                this.LoginOperationCompleted = new System.Threading.SendOrPostCallback(this.OnLoginOperationCompleted);
+        public void LoginRecepcionistAsync(int idn, object userState) {
+            if ((this.LoginRecepcionistOperationCompleted == null)) {
+                this.LoginRecepcionistOperationCompleted = new System.Threading.SendOrPostCallback(this.OnLoginRecepcionistOperationCompleted);
             }
-            this.InvokeAsync("Login", new object[] {
-                        user}, this.LoginOperationCompleted, userState);
+            this.InvokeAsync("LoginRecepcionist", new object[] {
+                        idn}, this.LoginRecepcionistOperationCompleted, userState);
         }
         
-        private void OnLoginOperationCompleted(object arg) {
-            if ((this.LoginCompleted != null)) {
+        private void OnLoginRecepcionistOperationCompleted(object arg) {
+            if ((this.LoginRecepcionistCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.LoginCompleted(this, new LoginCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.LoginRecepcionistCompleted(this, new LoginRecepcionistCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/LoginClient", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataTable LoginClient(int idn) {
+            object[] results = this.Invoke("LoginClient", new object[] {
+                        idn});
+            return ((System.Data.DataTable)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void LoginClientAsync(int idn) {
+            this.LoginClientAsync(idn, null);
+        }
+        
+        /// <remarks/>
+        public void LoginClientAsync(int idn, object userState) {
+            if ((this.LoginClientOperationCompleted == null)) {
+                this.LoginClientOperationCompleted = new System.Threading.SendOrPostCallback(this.OnLoginClientOperationCompleted);
+            }
+            this.InvokeAsync("LoginClient", new object[] {
+                        idn}, this.LoginClientOperationCompleted, userState);
+        }
+        
+        private void OnLoginClientOperationCompleted(object arg) {
+            if ((this.LoginClientCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.LoginClientCompleted(this, new LoginClientCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -181,17 +215,43 @@ namespace WebApplication1.localhost {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void LoginCompletedEventHandler(object sender, LoginCompletedEventArgs e);
+    public delegate void LoginRecepcionistCompletedEventHandler(object sender, LoginRecepcionistCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class LoginCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class LoginRecepcionistCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal LoginCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal LoginRecepcionistCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataTable Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataTable)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void LoginClientCompletedEventHandler(object sender, LoginClientCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class LoginClientCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal LoginClientCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
