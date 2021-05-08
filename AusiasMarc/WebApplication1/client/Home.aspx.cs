@@ -16,6 +16,10 @@ namespace WebApplication1.client
         public WebService1 ws;
         String id, nameClient;
 
+        protected void Reservas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         { 

@@ -32,25 +32,23 @@ namespace WebApplication1.admin
 
             dt = ws.DataReserve(Int32.Parse(id), 1);
 
-            String reserve;
+
+            List<Reserva> reservas = new List<Reserva>();
 
             foreach (DataRow dr in dt.Rows)
             {
 
-                reserve = nameRecepcionist + "\t";
 
-                dt = ws.DataRecepcionist(Int32.Parse(dr["idRecepcionist"].ToString()));
+                dt = ws.DataClient(Int32.Parse(dr["idClient"].ToString()));
 
                 foreach (DataRow dr1 in dt.Rows)
                 {
-                    reserve += dr1["name"].ToString() + "\t";
+
+                    Reserva reserva = new Reserva(nameRecepcionist, dr1["name"].ToString(), dr["arrivalDate"].ToString(), dr["finishDate"].ToString(), dr["typeRoom"].ToString());
+                    ReservasList.Items.Add(reserva.ToString());
                 }
 
-                reserve += dr["arrivalDate"].ToString() + "\t";
-                reserve += dr["finishDate"].ToString() + "\t";
-                reserve += dr["typeRoom"].ToString() + "\t";
-
-                Reservas.Items.Add(reserve);
+                
             }
 
         }

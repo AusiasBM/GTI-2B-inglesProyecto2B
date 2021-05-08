@@ -11,7 +11,7 @@
     <form id="form1" runat="server">
         <div>
 
-            <asp:ListBox ID="Reservas" runat="server" Height="470px" Width="441px"></asp:ListBox>
+            <asp:ListBox ID="ReservasList" runat="server" Height="470px" Width="441px"></asp:ListBox>
 
         </div>
         
