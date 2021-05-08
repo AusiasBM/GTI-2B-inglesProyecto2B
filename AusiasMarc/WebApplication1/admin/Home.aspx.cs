@@ -43,12 +43,9 @@ namespace WebApplication1.admin
 
                 foreach (DataRow dr1 in dt.Rows)
                 {
-
                     Reserva reserva = new Reserva(nameRecepcionist, dr1["name"].ToString(), dr["arrivalDate"].ToString(), dr["finishDate"].ToString(), dr["typeRoom"].ToString());
                     ReservasList.Items.Add(reserva.ToString());
                 }
-
-                
             }
 
         }
