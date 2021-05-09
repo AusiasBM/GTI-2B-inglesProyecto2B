@@ -22,9 +22,15 @@ namespace WebApplication1.client
         }
 
         protected void Page_Load(object sender, EventArgs e)
-        { 
+        {
+
+            if (!(bool)Session["authentication"])
+            {
+                Response.Redirect("../Login.aspx");
+            }
+
             ws = new WebService1();
-            this.id = String.IsNullOrEmpty(Request.QueryString["id"]) ? "" : Request.QueryString["id"].ToString();
+            this.id = Session["id"].ToString();
 
             dt = ws.DataClient(Int32.Parse(id));
 
@@ -41,8 +47,8 @@ namespace WebApplication1.client
 
             foreach (DataRow dr in dt.Rows)
             {
-
-                reserve = nameClient + "\t";
+                reserve = dr["id"].ToString() + "\t";
+                reserve += nameClient + "\t";
 
                 dt = ws.DataRecepcionist(Int32.Parse(dr["idRecepcionist"].ToString()));
 

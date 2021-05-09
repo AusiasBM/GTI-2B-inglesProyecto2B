@@ -16,19 +16,33 @@ namespace WebApplication1.admin
         public WebService1 ws;
         String id, nameRecepcionist;
 
+        protected void ReservasList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            clientTextBox.Text = ReservasList.SelectedItem.ToString();
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            if (!(bool)Session["authentication"])
+            {
+                Response.Redirect("../Login.aspx");
+            }
+
+            ReservasList.Items.Clear();
+
             ws = new WebService1();
-            this.id = String.IsNullOrEmpty(Request.QueryString["id"]) ? "" : Request.QueryString["id"].ToString();
+            this.id = Session["id"].ToString();
 
             dt = ws.DataRecepcionist(Int32.Parse(id));
 
             foreach (DataRow dr in dt.Rows)
             {
                 id = dr["id"].ToString();
+                idnLabel.Text = dr["idn"].ToString();
                 nameRecepcionist = dr["name"].ToString();
+                nameLabel.Text = nameRecepcionist + " " + dr["surname"].ToString();
             }
-
 
             dt = ws.DataReserve(Int32.Parse(id), 1);
 
@@ -38,12 +52,11 @@ namespace WebApplication1.admin
             foreach (DataRow dr in dt.Rows)
             {
 
-
                 dt = ws.DataClient(Int32.Parse(dr["idClient"].ToString()));
 
                 foreach (DataRow dr1 in dt.Rows)
                 {
-                    Reserva reserva = new Reserva(nameRecepcionist, dr1["name"].ToString(), dr["arrivalDate"].ToString(), dr["finishDate"].ToString(), dr["typeRoom"].ToString());
+                    Reserva reserva = new Reserva(dr["id"].ToString(), nameRecepcionist, dr1["name"].ToString(), dr["arrivalDate"].ToString(), dr["finishDate"].ToString(), dr["typeRoom"].ToString());
                     ReservasList.Items.Add(reserva.ToString());
                 }
             }

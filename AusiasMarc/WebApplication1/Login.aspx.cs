@@ -15,6 +15,8 @@ namespace WebApplication1
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            Session["authentication"] = false;
+            Session["id"] = null;
             ws = new WebService1();
         }
         protected void Button1_Click(object sender, EventArgs e)
@@ -28,8 +30,9 @@ namespace WebApplication1
                 {
                     if (TextBox2.Text == dr["pass"].ToString())
                     {
-                        //ws.setId(Int32.Parse(dr["idn"].ToString()));
-                        Response.Redirect("./admin/Home.aspx?id=" + dr["id"].ToString());
+                        Session["authentication"] = true;
+                        Session["id"] = dr["id"].ToString();
+                        Response.Redirect("./admin/Home.aspx");
                     }
                 }
             }
@@ -37,8 +40,6 @@ namespace WebApplication1
             {
 
             }
-
-            
         }
 
         protected void Button2_Click(object sender, EventArgs e)
@@ -53,7 +54,9 @@ namespace WebApplication1
                 {
                     if (TextBox4.Text == dr["pass"].ToString())
                     {
-                        Response.Redirect("./client/Home.aspx?id=" + dr["id"].ToString());
+                        Session["authentication"] = true;
+                        Session["id"] = dr["id"].ToString();
+                        Response.Redirect("./client/Home.aspx");
                     }
 
                 }
