@@ -221,6 +221,7 @@ namespace WebApplication1.admin
             {
                 if (idnTextBox.Text != "" && nameTextBox.Text != "" && surnameTextBox.Text != "" && passTextBox.Text != "" && creditcardTextBox.Text != "")
                 {
+
                     ws.addClient(Int32.Parse(idnTextBox.Text), nameTextBox.Text, surnameTextBox.Text, Int32.Parse(passTextBox.Text), Int32.Parse(creditcardTextBox.Text));
 
                     idnTextBox.Text = "";

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -31,7 +33,23 @@ namespace WebApplication1
 
                 foreach (DataRow dr in dt.Rows)
                 {
-                    if (TextBox2.Text == dr["pass"].ToString())
+                    string pass = TextBox2.Text;
+
+                    using (MD5 md5Hash = MD5.Create())
+                    {
+                        byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(pass));
+                        pass = BitConverter.ToString(data).Replace("-", string.Empty);
+                    }
+
+                    string passBD = dr["pass"].ToString();
+
+                    using (MD5 md5Hash = MD5.Create())
+                    {
+                        byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(passBD));
+                        passBD = BitConverter.ToString(data).Replace("-", string.Empty);
+                    }
+
+                    if (pass == passBD)
                     {
                         Session["authentication"] = true;
                         Session["id"] = dr["id"].ToString();
@@ -55,13 +73,31 @@ namespace WebApplication1
 
                 foreach (DataRow dr in dt.Rows)
                 {
-                    if (TextBox4.Text == dr["pass"].ToString())
+                    string pass = TextBox4.Text;
+
+                    using (MD5 md5Hash = MD5.Create())
                     {
-                        Session["authentication"] = true;
-                        Session["id"] = dr["id"].ToString();
-                        Response.Redirect("./client/HomeClient.aspx");
+                        byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(pass));
+                        pass = BitConverter.ToString(data).Replace("-", string.Empty);
                     }
 
+                    string passBD = dr["pass"].ToString();
+
+                    using (MD5 md5Hash = MD5.Create())
+                    {
+                        byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(passBD));
+                        passBD = BitConverter.ToString(data).Replace("-", string.Empty);
+                    }
+
+                    if (pass == passBD)
+                    {
+                        {
+                            Session["authentication"] = true;
+                            Session["id"] = dr["id"].ToString();
+                            Response.Redirect("./client/HomeClient.aspx");
+                        }
+
+                    }
                 }
             }
             catch (Exception)
