@@ -125,7 +125,7 @@ namespace WebApplication1.admin
             {
                 if (idReserveTextBox.Text != "")
                 {
-                    ws.delReserve(Int32.Parse(idReserveTextBox.Text));
+                    ws.delReserve(Int32.Parse(idReserveTextBox.Text), Int32.Parse(id));
                     
                     idReserveTextBox.Text = "";
                     clientTextBox.Text = "";
@@ -230,12 +230,12 @@ namespace WebApplication1.admin
                 }
                 else
                 {
-                    noticeReserveLabel.Text = "Some field is missing";
+                    noticeClientLabel.Text = "Some field is missing";
                 }
             }
             catch (Exception ex)
             {
-                noticeReserveLabel.Text = "the client could not be added";
+                noticeClientLabel.Text = "the client could not be added";
             }
         }
 
@@ -258,12 +258,12 @@ namespace WebApplication1.admin
                 }
                 else
                 {
-                    noticeReserveLabel.Text = "Some field is missing";
+                    noticeClientLabel.Text = "Some field is missing";
                 }
             }
             catch (Exception)
             {
-                noticeReserveLabel.Text = "the client has not been modified correctly";
+                noticeClientLabel.Text = "the client has not been modified correctly";
             }
         }
 
@@ -287,13 +287,21 @@ namespace WebApplication1.admin
                 }
                 else
                 {
-                    noticeReserveLabel.Text = "The id field is empty";
+                    noticeClientLabel.Text = "The id field is empty";
                 }
             }
             catch (Exception)
             {
-                noticeReserveLabel.Text = "Unable to delete client";
+                noticeClientLabel.Text = "Unable to delete client";
             }
+        }
+
+        protected void logout_Click(object sender, EventArgs e)
+        {
+            Session["authentication"] = false;
+            Session["id"] = null;
+            Response.Redirect("../Login.aspx");
+            
         }
 
         protected void updateListClients()

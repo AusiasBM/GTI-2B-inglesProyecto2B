@@ -12,8 +12,9 @@
         <asp:Label ID="Label4" runat="server" Text="  Nombre: "></asp:Label>
         </strong>
         <asp:Label ID="nameLabel" runat="server" Text="Label"></asp:Label>
+        
     </div>
-
+    <asp:Button ID="logout" runat="server" Text="Logout" OnClick="logout_Click" />
     <br />
 <!-- ------------------------------------------------------------------------------------------------>
     <div>

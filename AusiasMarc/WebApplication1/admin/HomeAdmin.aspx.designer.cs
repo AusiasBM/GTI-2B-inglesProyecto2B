@@ -51,6 +51,15 @@ namespace WebApplication1.admin
         protected global::System.Web.UI.WebControls.Label nameLabel;
 
         /// <summary>
+        /// Control logout.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button logout;
+
+        /// <summary>
         /// Control ListBox1.
         /// </summary>
         /// <remarks>

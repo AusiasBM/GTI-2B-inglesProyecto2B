@@ -410,23 +410,25 @@ namespace WebApplication1.localhost {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/delReserve", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void delReserve(int id) {
+        public void delReserve(int id, int idRecepcionist) {
             this.Invoke("delReserve", new object[] {
-                        id});
+                        id,
+                        idRecepcionist});
         }
         
         /// <remarks/>
-        public void delReserveAsync(int id) {
-            this.delReserveAsync(id, null);
+        public void delReserveAsync(int id, int idRecepcionist) {
+            this.delReserveAsync(id, idRecepcionist, null);
         }
         
         /// <remarks/>
-        public void delReserveAsync(int id, object userState) {
+        public void delReserveAsync(int id, int idRecepcionist, object userState) {
             if ((this.delReserveOperationCompleted == null)) {
                 this.delReserveOperationCompleted = new System.Threading.SendOrPostCallback(this.OndelReserveOperationCompleted);
             }
             this.InvokeAsync("delReserve", new object[] {
-                        id}, this.delReserveOperationCompleted, userState);
+                        id,
+                        idRecepcionist}, this.delReserveOperationCompleted, userState);
         }
         
         private void OndelReserveOperationCompleted(object arg) {

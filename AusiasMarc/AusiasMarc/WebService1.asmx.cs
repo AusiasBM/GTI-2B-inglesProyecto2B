@@ -191,7 +191,7 @@ namespace AusiasMarc
         }
 
         [WebMethod]
-        public void delReserve(int id)
+        public void delReserve(int id, int idRecepcionist)
         {
 
             SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;");
@@ -199,7 +199,7 @@ namespace AusiasMarc
             conn.Open();
             using (conn)
             {
-                SQLiteCommand comm = new SQLiteCommand("DELETE FROM Reserve WHERE id='" + id + "'", conn);
+                SQLiteCommand comm = new SQLiteCommand("DELETE FROM Reserve WHERE id='" + id + "' AND idRecepcionist= '" + idRecepcionist + "'", conn);
                 SQLiteDataReader reader = comm.ExecuteReader();
                 reader.Close();
             }

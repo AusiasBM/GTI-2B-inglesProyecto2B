@@ -16,6 +16,13 @@ namespace WebApplication1.client
         public WebService1 ws;
         String id, nameClient;
 
+        protected void logout_Click(object sender, EventArgs e)
+        {
+            Session["authentication"] = false;
+            Session["id"] = null;
+            Response.Redirect("../Login.aspx");
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
