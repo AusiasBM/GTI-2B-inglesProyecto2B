@@ -219,5 +219,50 @@ namespace AusiasMarc
                 reader.Close();
             }
         }
+
+        [WebMethod]
+        public void addClient(int idn, string name, string surname, int pass, int creditcard)
+        {
+
+            SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;");
+
+            conn.Open();
+            using (conn)
+            {
+                SQLiteCommand comm = new SQLiteCommand("INSERT INTO Client (idn, name, surname, pass, creditcard) VALUES ('" + idn + "', '" + name + "', '" + surname + "', '" + pass + "', '" + creditcard + "')", conn);
+                SQLiteDataReader reader = comm.ExecuteReader();
+                reader.Close();
+            }
+        }
+
+        [WebMethod]
+        public void delClient(int id)
+        {
+
+            SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;");
+
+            conn.Open();
+            using (conn)
+            {
+                SQLiteCommand comm = new SQLiteCommand("DELETE FROM Client WHERE id='" + id + "'", conn);
+                SQLiteDataReader reader = comm.ExecuteReader();
+                reader.Close();
+            }
+        }
+
+        [WebMethod]
+        public void updateClient(int id, int idn, string name, string surname, int pass, int creditcard)
+        {
+
+            SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;");
+
+            conn.Open();
+            using (conn)
+            {
+                SQLiteCommand comm = new SQLiteCommand("UPDATE Client SET idn ='" + idn + "', name = '" + name + "', surname = '" + surname + "', pass = '" + pass + "', creditcard = '" + creditcard + "' WHERE id = " + id, conn);
+                SQLiteDataReader reader = comm.ExecuteReader();
+                reader.Close();
+            }
+        }
     }
 }

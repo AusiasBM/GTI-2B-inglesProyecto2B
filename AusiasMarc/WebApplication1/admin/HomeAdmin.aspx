@@ -115,9 +115,9 @@
         
             <hr />
             <div>
-                <asp:Button ID="addClient" runat="server" Text="ADD" />
-                <asp:Button ID="modClient" runat="server" Text="MODIFY" />
-                <asp:Button ID="delClient" runat="server" Text="DELETE" />
+                <asp:Button ID="addClient" runat="server" Text="ADD" OnClick="addClient_Click" />
+                <asp:Button ID="modClient" runat="server" Text="MODIFY" OnClick="modClient_Click" />
+                <asp:Button ID="delClient" runat="server" Text="DELETE" OnClick="delClient_Click" />
             </div>
 
         </div>    

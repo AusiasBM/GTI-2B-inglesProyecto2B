@@ -200,6 +200,45 @@
       <s:element name="updateReserveResponse">
         <s:complexType />
       </s:element>
+      <s:element name="addClient">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idn" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="surname" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="pass" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="creditcard" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="addClientResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="delClient">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="delClientResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="updateClient">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="idn" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="surname" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="pass" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="creditcard" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="updateClientResponse">
+        <s:complexType />
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="HelloWorldSoapIn">
@@ -268,6 +307,24 @@
   <wsdl:message name="updateReserveSoapOut">
     <wsdl:part name="parameters" element="tns:updateReserveResponse" />
   </wsdl:message>
+  <wsdl:message name="addClientSoapIn">
+    <wsdl:part name="parameters" element="tns:addClient" />
+  </wsdl:message>
+  <wsdl:message name="addClientSoapOut">
+    <wsdl:part name="parameters" element="tns:addClientResponse" />
+  </wsdl:message>
+  <wsdl:message name="delClientSoapIn">
+    <wsdl:part name="parameters" element="tns:delClient" />
+  </wsdl:message>
+  <wsdl:message name="delClientSoapOut">
+    <wsdl:part name="parameters" element="tns:delClientResponse" />
+  </wsdl:message>
+  <wsdl:message name="updateClientSoapIn">
+    <wsdl:part name="parameters" element="tns:updateClient" />
+  </wsdl:message>
+  <wsdl:message name="updateClientSoapOut">
+    <wsdl:part name="parameters" element="tns:updateClientResponse" />
+  </wsdl:message>
   <wsdl:portType name="WebService1Soap">
     <wsdl:operation name="HelloWorld">
       <wsdl:input message="tns:HelloWorldSoapIn" />
@@ -312,6 +369,18 @@
     <wsdl:operation name="updateReserve">
       <wsdl:input message="tns:updateReserveSoapIn" />
       <wsdl:output message="tns:updateReserveSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="addClient">
+      <wsdl:input message="tns:addClientSoapIn" />
+      <wsdl:output message="tns:addClientSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="delClient">
+      <wsdl:input message="tns:delClientSoapIn" />
+      <wsdl:output message="tns:delClientSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="updateClient">
+      <wsdl:input message="tns:updateClientSoapIn" />
+      <wsdl:output message="tns:updateClientSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WebService1Soap" type="tns:WebService1Soap">
@@ -415,6 +484,33 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="addClient">
+      <soap:operation soapAction="http://tempuri.org/addClient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="delClient">
+      <soap:operation soapAction="http://tempuri.org/delClient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateClient">
+      <soap:operation soapAction="http://tempuri.org/updateClient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="WebService1Soap12" type="tns:WebService1Soap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -510,6 +606,33 @@
     </wsdl:operation>
     <wsdl:operation name="updateReserve">
       <soap12:operation soapAction="http://tempuri.org/updateReserve" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addClient">
+      <soap12:operation soapAction="http://tempuri.org/addClient" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="delClient">
+      <soap12:operation soapAction="http://tempuri.org/delClient" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateClient">
+      <soap12:operation soapAction="http://tempuri.org/updateClient" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

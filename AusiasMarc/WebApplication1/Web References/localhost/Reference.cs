@@ -52,6 +52,12 @@ namespace WebApplication1.localhost {
         
         private System.Threading.SendOrPostCallback updateReserveOperationCompleted;
         
+        private System.Threading.SendOrPostCallback addClientOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback delClientOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback updateClientOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -122,6 +128,15 @@ namespace WebApplication1.localhost {
         
         /// <remarks/>
         public event updateReserveCompletedEventHandler updateReserveCompleted;
+        
+        /// <remarks/>
+        public event addClientCompletedEventHandler addClientCompleted;
+        
+        /// <remarks/>
+        public event delClientCompletedEventHandler delClientCompleted;
+        
+        /// <remarks/>
+        public event updateClientCompletedEventHandler updateClientCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/HelloWorld", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -460,6 +475,108 @@ namespace WebApplication1.localhost {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/addClient", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void addClient(int idn, string name, string surname, int pass, int creditcard) {
+            this.Invoke("addClient", new object[] {
+                        idn,
+                        name,
+                        surname,
+                        pass,
+                        creditcard});
+        }
+        
+        /// <remarks/>
+        public void addClientAsync(int idn, string name, string surname, int pass, int creditcard) {
+            this.addClientAsync(idn, name, surname, pass, creditcard, null);
+        }
+        
+        /// <remarks/>
+        public void addClientAsync(int idn, string name, string surname, int pass, int creditcard, object userState) {
+            if ((this.addClientOperationCompleted == null)) {
+                this.addClientOperationCompleted = new System.Threading.SendOrPostCallback(this.OnaddClientOperationCompleted);
+            }
+            this.InvokeAsync("addClient", new object[] {
+                        idn,
+                        name,
+                        surname,
+                        pass,
+                        creditcard}, this.addClientOperationCompleted, userState);
+        }
+        
+        private void OnaddClientOperationCompleted(object arg) {
+            if ((this.addClientCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.addClientCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/delClient", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void delClient(int id) {
+            this.Invoke("delClient", new object[] {
+                        id});
+        }
+        
+        /// <remarks/>
+        public void delClientAsync(int id) {
+            this.delClientAsync(id, null);
+        }
+        
+        /// <remarks/>
+        public void delClientAsync(int id, object userState) {
+            if ((this.delClientOperationCompleted == null)) {
+                this.delClientOperationCompleted = new System.Threading.SendOrPostCallback(this.OndelClientOperationCompleted);
+            }
+            this.InvokeAsync("delClient", new object[] {
+                        id}, this.delClientOperationCompleted, userState);
+        }
+        
+        private void OndelClientOperationCompleted(object arg) {
+            if ((this.delClientCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.delClientCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/updateClient", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void updateClient(int id, int idn, string name, string surname, int pass, int creditcard) {
+            this.Invoke("updateClient", new object[] {
+                        id,
+                        idn,
+                        name,
+                        surname,
+                        pass,
+                        creditcard});
+        }
+        
+        /// <remarks/>
+        public void updateClientAsync(int id, int idn, string name, string surname, int pass, int creditcard) {
+            this.updateClientAsync(id, idn, name, surname, pass, creditcard, null);
+        }
+        
+        /// <remarks/>
+        public void updateClientAsync(int id, int idn, string name, string surname, int pass, int creditcard, object userState) {
+            if ((this.updateClientOperationCompleted == null)) {
+                this.updateClientOperationCompleted = new System.Threading.SendOrPostCallback(this.OnupdateClientOperationCompleted);
+            }
+            this.InvokeAsync("updateClient", new object[] {
+                        id,
+                        idn,
+                        name,
+                        surname,
+                        pass,
+                        creditcard}, this.updateClientOperationCompleted, userState);
+        }
+        
+        private void OnupdateClientOperationCompleted(object arg) {
+            if ((this.updateClientCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.updateClientCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -697,6 +814,18 @@ namespace WebApplication1.localhost {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void updateReserveCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void addClientCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void delClientCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void updateClientCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
 }
 
 #pragma warning restore 1591

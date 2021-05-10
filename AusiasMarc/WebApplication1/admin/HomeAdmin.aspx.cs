@@ -26,8 +26,6 @@ namespace WebApplication1.admin
                 Response.Redirect("../Login.aspx");
             }
 
-            ListBox2.Items.Clear();
-
             ws = new WebService1();
             this.id = Session["id"].ToString();
 
@@ -107,7 +105,7 @@ namespace WebApplication1.admin
                     typeRoomTextBox.Text = "";
                     noticeReserveLabel.Text = "";
 
-                    updateListaReservas();
+                    updateListReservas();
                 }
                 else
                 {
@@ -136,7 +134,7 @@ namespace WebApplication1.admin
                     typeRoomTextBox.Text = "";
                     noticeReserveLabel.Text = "";
 
-                    updateListaReservas();
+                    updateListReservas();
 
                 }
                 else
@@ -158,7 +156,7 @@ namespace WebApplication1.admin
                 {
                     ws.updateReserve(Int32.Parse(idReserveTextBox.Text), Int32.Parse(id), Int32.Parse(clientTextBox.Text), arrivalDateTextBox.Text, finishDateTextBox.Text, typeRoomTextBox.Text);
 
-                    updateListaReservas();
+                    updateListReservas();
                     idReserveTextBox.Text = "";
                     clientTextBox.Text = "";
                     arrivalDateTextBox.Text = "";
@@ -190,24 +188,12 @@ namespace WebApplication1.admin
                 nameLabel.Text = nameRecepcionist + " " + dr["surname"].ToString();
             }
 
-            updateListaReservas();
+            updateListReservas();
 
-            dt = ws.allClients(0);
-            string client;
-            foreach (DataRow dr in dt.Rows)
-            {
-
-                client = "ID: " + dr["id"].ToString() + " --> \t";
-                client += dr["idn"].ToString() + " \t";
-                client += dr["name"].ToString() + " \t";
-                client += dr["surname"].ToString() + " \t";
-                client += dr["pass"].ToString() + " \t";
-                client += dr["creditcard"].ToString();
-                ListBox2.Items.Add(client);
-            }
+            updateListClients();
         }
 
-        protected void updateListaReservas()
+        protected void updateListReservas()
         {
             ListBox1.Items.Clear();
             dt = ws.DataReserve(Int32.Parse(id), 1);
@@ -225,5 +211,108 @@ namespace WebApplication1.admin
             }
         }
 
+        protected void addClient_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (idnTextBox.Text != "" && nameTextBox.Text != "" && surnameTextBox.Text != "" && passTextBox.Text != "" && creditcardTextBox.Text != "")
+                {
+                    ws.addClient(Int32.Parse(idnTextBox.Text), nameTextBox.Text, surnameTextBox.Text, Int32.Parse(passTextBox.Text), Int32.Parse(creditcardTextBox.Text));
+
+                    idnTextBox.Text = "";
+                    nameTextBox.Text = "";
+                    surnameTextBox.Text = "";
+                    passTextBox.Text = "";
+                    creditcardTextBox.Text = "";
+                    idClientTextBox.Text = "";
+
+                    updateListClients();
+                }
+                else
+                {
+                    noticeReserveLabel.Text = "Some field is missing";
+                }
+            }
+            catch (Exception ex)
+            {
+                noticeReserveLabel.Text = "the client could not be added";
+            }
+        }
+
+        protected void modClient_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (idnTextBox.Text != "" && idClientTextBox.Text != "" && nameTextBox.Text != "" && surnameTextBox.Text != "" && passTextBox.Text != "" && creditcardTextBox.Text != "")
+                {
+                    ws.updateClient(Int32.Parse(idClientTextBox.Text), Int32.Parse(idnTextBox.Text), nameTextBox.Text, surnameTextBox.Text, Int32.Parse(passTextBox.Text), Int32.Parse(creditcardTextBox.Text));
+
+                    idnTextBox.Text = "";
+                    nameTextBox.Text = "";
+                    surnameTextBox.Text = "";
+                    passTextBox.Text = "";
+                    creditcardTextBox.Text = "";
+                    idClientTextBox.Text = "";
+
+                    updateListClients();
+                }
+                else
+                {
+                    noticeReserveLabel.Text = "Some field is missing";
+                }
+            }
+            catch (Exception)
+            {
+                noticeReserveLabel.Text = "the client has not been modified correctly";
+            }
+        }
+
+        protected void delClient_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (idClientTextBox.Text != "")
+                {
+                    ws.delClient(Int32.Parse(idClientTextBox.Text));
+                    
+                    idnTextBox.Text = "";
+                    nameTextBox.Text = "";
+                    surnameTextBox.Text = "";
+                    passTextBox.Text = "";
+                    creditcardTextBox.Text = "";
+                    idClientTextBox.Text = "";
+
+                    updateListClients();
+
+                }
+                else
+                {
+                    noticeReserveLabel.Text = "The id field is empty";
+                }
+            }
+            catch (Exception)
+            {
+                noticeReserveLabel.Text = "Unable to delete client";
+            }
+        }
+
+        protected void updateListClients()
+        {
+            ListBox2.Items.Clear();
+
+            dt = ws.allClients(0);
+            string client;
+            foreach (DataRow dr in dt.Rows)
+            {
+
+                client = "ID: " + dr["id"].ToString() + " --> \t";
+                client += dr["idn"].ToString() + " \t";
+                client += dr["name"].ToString() + " \t";
+                client += dr["surname"].ToString() + " \t";
+                client += dr["pass"].ToString() + " \t";
+                client += dr["creditcard"].ToString();
+                ListBox2.Items.Add(client);
+            }
+        }
     }
 }
