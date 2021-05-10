@@ -28,7 +28,7 @@
             <br />
         
             ID reserve:
-            <asp:TextBox ID="idReserveTextBox" runat="server"></asp:TextBox>
+            <asp:TextBox ID="idReserveTextBox" runat="server" TextMode="Number"></asp:TextBox>
             <asp:Button ID="searchButtonReserve" runat="server" OnClick="searchButtonReserve_Click" Text="SEARCH RESERVE" />
         
             <br />
@@ -44,12 +44,12 @@
     
             <div>
                 Arrival Date:
-                <asp:TextBox ID="arrivalDateTextBox" runat="server"></asp:TextBox>   
+                <asp:TextBox ID="arrivalDateTextBox" runat="server" TextMode="Date"></asp:TextBox>   
             </div>
        
             <div>
                 Finish Date:
-                <asp:TextBox ID="finishDateTextBox" runat="server"></asp:TextBox>   
+                <asp:TextBox ID="finishDateTextBox" runat="server" TextMode="Date"></asp:TextBox>   
             </div>
        
             <div>
@@ -78,7 +78,7 @@
             <br />
         
             ID client:
-            <asp:TextBox ID="idClientTextBox" runat="server"></asp:TextBox>
+            <asp:TextBox ID="idClientTextBox" runat="server" TextMode="Number"></asp:TextBox>
             <asp:Button ID="searchButtonClient" runat="server" Text="SEARCH CLIENT" OnClick="searchButtonClient_Click" />
         
             <br />
@@ -89,7 +89,7 @@
         
             <div>
                 Idn:
-                <asp:TextBox ID="idnTextBox" runat="server"></asp:TextBox>   
+                <asp:TextBox ID="idnTextBox" runat="server" TextMode="Number"></asp:TextBox>   
             </div>
     
             <div>
@@ -104,13 +104,13 @@
        
             <div>
                 Password:
-                <asp:TextBox ID="passTextBox" runat="server"></asp:TextBox>  
+                <asp:TextBox ID="passTextBox" runat="server" TextMode="Number"></asp:TextBox>  
 
             </div>
 
             <div>
                 Credit Card:
-                <asp:TextBox ID="creditcardTextBox" runat="server"></asp:TextBox>  
+                <asp:TextBox ID="creditcardTextBox" runat="server" TextMode="Number"></asp:TextBox>  
             </div>
         
             <hr />
