@@ -176,9 +176,8 @@ namespace AusiasMarc
         }
 
         [WebMethod]
-        public DataTable addReserve(int idRecepcionist, int idClient, string arrivalDate, string finishDate, string typeRoom)
+        public void addReserve(int idRecepcionist, int idClient, string arrivalDate, string finishDate, string typeRoom)
         {
-            DataTable dt = new DataTable();
 
             SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;");
 
@@ -187,16 +186,13 @@ namespace AusiasMarc
             {
                 SQLiteCommand comm = new SQLiteCommand("INSERT INTO Reserve (idRecepcionist, idClient, arrivalDate, finishDate, typeRoom) VALUES ('" + idRecepcionist + "', '" + idClient + "', '" + arrivalDate + "', '" + finishDate + "', '" + typeRoom + "')", conn);
                 SQLiteDataReader reader = comm.ExecuteReader();
-                dt.Load(reader);
                 reader.Close();
             }
-            return dt;
         }
 
         [WebMethod]
-        public DataTable delReserve(int id)
+        public void delReserve(int id)
         {
-            DataTable dt = new DataTable();
 
             SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;");
 
@@ -205,28 +201,23 @@ namespace AusiasMarc
             {
                 SQLiteCommand comm = new SQLiteCommand("DELETE FROM Reserve WHERE id='" + id + "'", conn);
                 SQLiteDataReader reader = comm.ExecuteReader();
-                dt.Load(reader);
                 reader.Close();
             }
-            return dt;
         }
 
         [WebMethod]
-        public DataTable updateReserve(int id, int idRecepcionist, int idClient, string arrivalDate, string finishDate, string typeRoom)
+        public void updateReserve(int id, int idRecepcionist, int idClient, string arrivalDate, string finishDate, string typeRoom)
         {
-            DataTable dt = new DataTable();
 
             SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;");
 
             conn.Open();
             using (conn)
             {
-                SQLiteCommand comm = new SQLiteCommand("UPDATE Reserve SET idRecepcionist ='" + idRecepcionist + ", idClient = '" + idClient + "', arrivalDate = '" + arrivalDate + "', finishDate = '" + finishDate + "', typeRoom = '" + typeRoom + "' WHERE id = " + id, conn);
+                SQLiteCommand comm = new SQLiteCommand("UPDATE Reserve SET idRecepcionist ='" + idRecepcionist + "', idClient = '" + idClient + "', arrivalDate = '" + arrivalDate + "', finishDate = '" + finishDate + "', typeRoom = '" + typeRoom + "' WHERE id = " + id, conn);
                 SQLiteDataReader reader = comm.ExecuteReader();
-                dt.Load(reader);
                 reader.Close();
             }
-            return dt;
         }
     }
 }

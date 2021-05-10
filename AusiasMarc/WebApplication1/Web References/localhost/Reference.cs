@@ -359,14 +359,13 @@ namespace WebApplication1.localhost {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/addReserve", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public System.Data.DataTable addReserve(int idRecepcionist, int idClient, string arrivalDate, string finishDate, string typeRoom) {
-            object[] results = this.Invoke("addReserve", new object[] {
+        public void addReserve(int idRecepcionist, int idClient, string arrivalDate, string finishDate, string typeRoom) {
+            this.Invoke("addReserve", new object[] {
                         idRecepcionist,
                         idClient,
                         arrivalDate,
                         finishDate,
                         typeRoom});
-            return ((System.Data.DataTable)(results[0]));
         }
         
         /// <remarks/>
@@ -390,16 +389,15 @@ namespace WebApplication1.localhost {
         private void OnaddReserveOperationCompleted(object arg) {
             if ((this.addReserveCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.addReserveCompleted(this, new addReserveCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.addReserveCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/delReserve", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public System.Data.DataTable delReserve(int id) {
-            object[] results = this.Invoke("delReserve", new object[] {
+        public void delReserve(int id) {
+            this.Invoke("delReserve", new object[] {
                         id});
-            return ((System.Data.DataTable)(results[0]));
         }
         
         /// <remarks/>
@@ -419,21 +417,20 @@ namespace WebApplication1.localhost {
         private void OndelReserveOperationCompleted(object arg) {
             if ((this.delReserveCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.delReserveCompleted(this, new delReserveCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.delReserveCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/updateReserve", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public System.Data.DataTable updateReserve(int id, int idRecepcionist, int idClient, string arrivalDate, string finishDate, string typeRoom) {
-            object[] results = this.Invoke("updateReserve", new object[] {
+        public void updateReserve(int id, int idRecepcionist, int idClient, string arrivalDate, string finishDate, string typeRoom) {
+            this.Invoke("updateReserve", new object[] {
                         id,
                         idRecepcionist,
                         idClient,
                         arrivalDate,
                         finishDate,
                         typeRoom});
-            return ((System.Data.DataTable)(results[0]));
         }
         
         /// <remarks/>
@@ -458,7 +455,7 @@ namespace WebApplication1.localhost {
         private void OnupdateReserveOperationCompleted(object arg) {
             if ((this.updateReserveCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.updateReserveCompleted(this, new updateReserveCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.updateReserveCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -691,81 +688,15 @@ namespace WebApplication1.localhost {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void addReserveCompletedEventHandler(object sender, addReserveCompletedEventArgs e);
+    public delegate void addReserveCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class addReserveCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal addReserveCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public System.Data.DataTable Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((System.Data.DataTable)(this.results[0]));
-            }
-        }
-    }
+    public delegate void delReserveCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void delReserveCompletedEventHandler(object sender, delReserveCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class delReserveCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal delReserveCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public System.Data.DataTable Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((System.Data.DataTable)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void updateReserveCompletedEventHandler(object sender, updateReserveCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class updateReserveCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal updateReserveCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public System.Data.DataTable Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((System.Data.DataTable)(this.results[0]));
-            }
-        }
-    }
+    public delegate void updateReserveCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
 }
 
 #pragma warning restore 1591

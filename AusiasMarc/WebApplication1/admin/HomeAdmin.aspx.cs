@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -97,24 +98,25 @@ namespace WebApplication1.admin
             {
                 if (clientTextBox.Text != "" && arrivalDateTextBox.Text != "" && finishDateTextBox.Text != "" && typeRoomTextBox.Text != "")
                 {
-                    dt = ws.addReserve(Int32.Parse(id), Int32.Parse(clientTextBox.Text), arrivalDateTextBox.Text, finishDateTextBox.Text, typeRoomTextBox.Text);
+                    ws.addReserve(Int32.Parse(id), Int32.Parse(clientTextBox.Text.ToString()), arrivalDateTextBox.Text.ToString(), finishDateTextBox.Text.ToString(), typeRoomTextBox.Text.ToString());
 
-                    updateListaReservas();
                     idReserveTextBox.Text = "";
                     clientTextBox.Text = "";
                     arrivalDateTextBox.Text = "";
                     finishDateTextBox.Text = "";
                     typeRoomTextBox.Text = "";
                     noticeReserveLabel.Text = "";
+
+                    updateListaReservas();
                 }
                 else
                 {
-                    noticeClientLabel.Text = "Some field is missing";
+                    noticeReserveLabel.Text = "Some field is missing";
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                noticeClientLabel.Text = "the reservation could not be added";
+                noticeReserveLabel.Text = "the reservation could not be added";
             }
             
         }
@@ -125,7 +127,7 @@ namespace WebApplication1.admin
             {
                 if (idReserveTextBox.Text != "")
                 {
-                    dt = ws.delReserve(Int32.Parse(idReserveTextBox.Text));
+                    ws.delReserve(Int32.Parse(idReserveTextBox.Text));
                     
                     idReserveTextBox.Text = "";
                     clientTextBox.Text = "";
@@ -139,12 +141,12 @@ namespace WebApplication1.admin
                 }
                 else
                 {
-                    noticeClientLabel.Text = "The id field is empty";
+                    noticeReserveLabel.Text = "The id field is empty";
                 }
             }
             catch (Exception)
             {
-                noticeClientLabel.Text = "Unable to delete reservation";
+                noticeReserveLabel.Text = "Unable to delete reservation";
             }
         }
 
@@ -154,7 +156,7 @@ namespace WebApplication1.admin
             {
                 if (idReserveTextBox.Text != "" && clientTextBox.Text != "" && arrivalDateTextBox.Text != "" && finishDateTextBox.Text != "" && typeRoomTextBox.Text != "")
                 {
-                    dt = ws.updateReserve(Int32.Parse(idReserveTextBox.Text), Int32.Parse(id), Int32.Parse(clientTextBox.Text), arrivalDateTextBox.Text, finishDateTextBox.Text, typeRoomTextBox.Text);
+                    ws.updateReserve(Int32.Parse(idReserveTextBox.Text), Int32.Parse(id), Int32.Parse(clientTextBox.Text), arrivalDateTextBox.Text, finishDateTextBox.Text, typeRoomTextBox.Text);
 
                     updateListaReservas();
                     idReserveTextBox.Text = "";
@@ -166,12 +168,12 @@ namespace WebApplication1.admin
                 }
                 else
                 {
-                    noticeClientLabel.Text = "Some field is missing";
+                    noticeReserveLabel.Text = "Some field is missing";
                 }
             }
             catch (Exception)
             {
-                noticeClientLabel.Text = "the reservation could not be added";
+                noticeReserveLabel.Text = "the reservation has not been modified correctly";
             }
         }
 
