@@ -14,8 +14,6 @@ namespace WebApplication1.admin
         public string finishDate { get; set; }
         public string typeRoom { get; set; }
 
-        public int Valor { get; set; } // Valor del disco
-
         public Reserva(string idReserva, string NameRecepcionist, string NameClient, string arrivalDate, string finishDate, string typeRoom)
         {
             this.idReserva = idReserva;

@@ -23,11 +23,18 @@ namespace WebApplication1.admin
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            if (!(bool)Session["authentication"])
+            try
+            {
+                if (!(bool)Session["authentication"])
+                {
+                    Response.Redirect("../Login.aspx");
+                }
+            }
+            catch (Exception)
             {
                 Response.Redirect("../Login.aspx");
             }
+            
 
             ws = new WebService1();
             this.id = Session["id"].ToString();

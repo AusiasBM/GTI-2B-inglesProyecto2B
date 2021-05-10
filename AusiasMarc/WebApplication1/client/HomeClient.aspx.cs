@@ -26,7 +26,14 @@ namespace WebApplication1.client
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            if (!(bool)Session["authentication"])
+            try
+            {
+                if (!(bool)Session["authentication"])
+                {
+                    Response.Redirect("../Login.aspx");
+                }
+            }
+            catch (Exception)
             {
                 Response.Redirect("../Login.aspx");
             }
