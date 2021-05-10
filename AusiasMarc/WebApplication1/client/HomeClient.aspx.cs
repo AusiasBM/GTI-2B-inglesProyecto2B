@@ -9,17 +9,12 @@ using WebApplication1.localhost;
 
 namespace WebApplication1.client
 {
-    public partial class Home : System.Web.UI.Page
+    public partial class HomeClient : System.Web.UI.Page
     {
         public DataTable dt = new DataTable();
         public string DBpath = HttpRuntime.AppDomainAppPath + "dataBase.db";
         public WebService1 ws;
         String id, nameClient;
-
-        protected void Reservas_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -37,7 +32,7 @@ namespace WebApplication1.client
             foreach (DataRow dr in dt.Rows)
             {
                 Label1.Text = dr["idn"].ToString();
-                nameClient= dr["name"].ToString();
+                nameClient = dr["name"].ToString();
                 Label1.Text += " " + nameClient + " " + dr["surname"].ToString();
             }
 

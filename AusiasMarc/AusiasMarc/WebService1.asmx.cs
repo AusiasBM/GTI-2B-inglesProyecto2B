@@ -21,19 +21,6 @@ namespace AusiasMarc
     public class WebService1 : System.Web.Services.WebService
     {
         public string DBpath = HttpRuntime.AppDomainAppPath + "database.db";
-        public int id;
-
-        [WebMethod]
-        public void setId(int id)
-        {
-            this.id = id;
-        }
-
-        [WebMethod]
-        public int getId()
-        {
-            return this.id;
-        }
 
         [WebMethod]
         public string HelloWorld()
@@ -70,6 +57,34 @@ namespace AusiasMarc
             using (conn)
             {
                 SQLiteCommand comm = new SQLiteCommand("SELECT * FROM Client WHERE idn='" + idn + "'", conn);
+                SQLiteDataReader reader = comm.ExecuteReader();
+                dt.Load(reader);
+                reader.Close();
+            }
+            return dt;
+        }
+
+        [WebMethod]
+        public DataTable allClients(int id)
+        {
+            DataTable dt = new DataTable();
+
+            SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;");
+
+            conn.Open();
+            using (conn)
+            {
+                SQLiteCommand comm;
+
+                if (id == 0)
+                {
+                    comm = new SQLiteCommand("SELECT * FROM Client", conn);
+                }
+                else
+                {
+                    comm = new SQLiteCommand("SELECT * FROM Client WHERE id='" + id + "'", conn);
+                }
+                 
                 SQLiteDataReader reader = comm.ExecuteReader();
                 dt.Load(reader);
                 reader.Close();
@@ -133,6 +148,80 @@ namespace AusiasMarc
                     comm = new SQLiteCommand("SELECT * FROM Reserve WHERE idRecepcionist='" + id + "'", conn);
                 }
                 
+                SQLiteDataReader reader = comm.ExecuteReader();
+                dt.Load(reader);
+                reader.Close();
+            }
+            return dt;
+        }
+
+        [WebMethod]
+        public DataTable DataReserveId(int id, int idRecepcionist)
+        {
+            DataTable dt = new DataTable();
+
+            SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;");
+
+            conn.Open();
+            using (conn)
+            {
+                SQLiteCommand comm = new SQLiteCommand("SELECT * FROM Reserve WHERE id='" + id + "' AND idRecepcionist='" + idRecepcionist + "'", conn);
+
+
+                SQLiteDataReader reader = comm.ExecuteReader();
+                dt.Load(reader);
+                reader.Close();
+            }
+            return dt;
+        }
+
+        [WebMethod]
+        public DataTable addReserve(int idRecepcionist, int idClient, string arrivalDate, string finishDate, string typeRoom)
+        {
+            DataTable dt = new DataTable();
+
+            SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;");
+
+            conn.Open();
+            using (conn)
+            {
+                SQLiteCommand comm = new SQLiteCommand("INSERT INTO Reserve (idRecepcionist, idClient, arrivalDate, finishDate, typeRoom) VALUES ('" + idRecepcionist + "', '" + idClient + "', '" + arrivalDate + "', '" + finishDate + "', '" + typeRoom + "')", conn);
+                SQLiteDataReader reader = comm.ExecuteReader();
+                dt.Load(reader);
+                reader.Close();
+            }
+            return dt;
+        }
+
+        [WebMethod]
+        public DataTable delReserve(int id)
+        {
+            DataTable dt = new DataTable();
+
+            SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;");
+
+            conn.Open();
+            using (conn)
+            {
+                SQLiteCommand comm = new SQLiteCommand("DELETE FROM Reserve WHERE id='" + id + "'", conn);
+                SQLiteDataReader reader = comm.ExecuteReader();
+                dt.Load(reader);
+                reader.Close();
+            }
+            return dt;
+        }
+
+        [WebMethod]
+        public DataTable updateReserve(int id, int idRecepcionist, int idClient, string arrivalDate, string finishDate, string typeRoom)
+        {
+            DataTable dt = new DataTable();
+
+            SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;");
+
+            conn.Open();
+            using (conn)
+            {
+                SQLiteCommand comm = new SQLiteCommand("UPDATE Reserve SET idRecepcionist ='" + idRecepcionist + ", idClient = '" + idClient + "', arrivalDate = '" + arrivalDate + "', finishDate = '" + finishDate + "', typeRoom = '" + typeRoom + "' WHERE id = " + id, conn);
                 SQLiteDataReader reader = comm.ExecuteReader();
                 dt.Load(reader);
                 reader.Close();

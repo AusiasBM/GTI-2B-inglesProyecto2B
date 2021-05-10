@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 using WebApplication1.localhost;
 
 namespace WebApplication1
 {
-    public partial class Login : System.Web.UI.Page
+    public partial class Login1 : System.Web.UI.Page
     {
-
         public DataTable dt = new DataTable();
         public string DBpath = HttpRuntime.AppDomainAppPath + "dataBase.db";
         public WebService1 ws;
@@ -21,7 +23,8 @@ namespace WebApplication1
         }
         protected void Button1_Click(object sender, EventArgs e)
         {
-            try{
+            try
+            {
                 int user = Int32.Parse(TextBox1.Text);
 
                 dt = ws.LoginRecepcionist(user);
@@ -32,11 +35,11 @@ namespace WebApplication1
                     {
                         Session["authentication"] = true;
                         Session["id"] = dr["id"].ToString();
-                        Response.Redirect("./admin/Home.aspx");
+                        Response.Redirect("./admin/HomeAdmin.aspx");
                     }
                 }
             }
-            catch(Exception)
+            catch (Exception)
             {
 
             }
@@ -56,7 +59,7 @@ namespace WebApplication1
                     {
                         Session["authentication"] = true;
                         Session["id"] = dr["id"].ToString();
-                        Response.Redirect("./client/Home.aspx");
+                        Response.Redirect("./client/HomeClient.aspx");
                     }
 
                 }
@@ -65,7 +68,7 @@ namespace WebApplication1
             {
 
             }
-            
+
 
         }
     }

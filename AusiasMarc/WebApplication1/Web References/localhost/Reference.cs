@@ -30,21 +30,27 @@ namespace WebApplication1.localhost {
     [System.Web.Services.WebServiceBindingAttribute(Name="WebService1Soap", Namespace="http://tempuri.org/")]
     public partial class WebService1 : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
-        private System.Threading.SendOrPostCallback setIdOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback getIdOperationCompleted;
-        
         private System.Threading.SendOrPostCallback HelloWorldOperationCompleted;
         
         private System.Threading.SendOrPostCallback LoginRecepcionistOperationCompleted;
         
         private System.Threading.SendOrPostCallback LoginClientOperationCompleted;
         
+        private System.Threading.SendOrPostCallback allClientsOperationCompleted;
+        
         private System.Threading.SendOrPostCallback DataRecepcionistOperationCompleted;
         
         private System.Threading.SendOrPostCallback DataClientOperationCompleted;
         
         private System.Threading.SendOrPostCallback DataReserveOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback DataReserveIdOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback addReserveOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback delReserveOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback updateReserveOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -85,12 +91,6 @@ namespace WebApplication1.localhost {
         }
         
         /// <remarks/>
-        public event setIdCompletedEventHandler setIdCompleted;
-        
-        /// <remarks/>
-        public event getIdCompletedEventHandler getIdCompleted;
-        
-        /// <remarks/>
         public event HelloWorldCompletedEventHandler HelloWorldCompleted;
         
         /// <remarks/>
@@ -98,6 +98,9 @@ namespace WebApplication1.localhost {
         
         /// <remarks/>
         public event LoginClientCompletedEventHandler LoginClientCompleted;
+        
+        /// <remarks/>
+        public event allClientsCompletedEventHandler allClientsCompleted;
         
         /// <remarks/>
         public event DataRecepcionistCompletedEventHandler DataRecepcionistCompleted;
@@ -109,59 +112,16 @@ namespace WebApplication1.localhost {
         public event DataReserveCompletedEventHandler DataReserveCompleted;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/setId", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void setId(int id) {
-            this.Invoke("setId", new object[] {
-                        id});
-        }
+        public event DataReserveIdCompletedEventHandler DataReserveIdCompleted;
         
         /// <remarks/>
-        public void setIdAsync(int id) {
-            this.setIdAsync(id, null);
-        }
+        public event addReserveCompletedEventHandler addReserveCompleted;
         
         /// <remarks/>
-        public void setIdAsync(int id, object userState) {
-            if ((this.setIdOperationCompleted == null)) {
-                this.setIdOperationCompleted = new System.Threading.SendOrPostCallback(this.OnsetIdOperationCompleted);
-            }
-            this.InvokeAsync("setId", new object[] {
-                        id}, this.setIdOperationCompleted, userState);
-        }
-        
-        private void OnsetIdOperationCompleted(object arg) {
-            if ((this.setIdCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.setIdCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
+        public event delReserveCompletedEventHandler delReserveCompleted;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/getId", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public int getId() {
-            object[] results = this.Invoke("getId", new object[0]);
-            return ((int)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void getIdAsync() {
-            this.getIdAsync(null);
-        }
-        
-        /// <remarks/>
-        public void getIdAsync(object userState) {
-            if ((this.getIdOperationCompleted == null)) {
-                this.getIdOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetIdOperationCompleted);
-            }
-            this.InvokeAsync("getId", new object[0], this.getIdOperationCompleted, userState);
-        }
-        
-        private void OngetIdOperationCompleted(object arg) {
-            if ((this.getIdCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.getIdCompleted(this, new getIdCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
+        public event updateReserveCompletedEventHandler updateReserveCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/HelloWorld", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -245,6 +205,35 @@ namespace WebApplication1.localhost {
             if ((this.LoginClientCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.LoginClientCompleted(this, new LoginClientCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/allClients", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataTable allClients(int id) {
+            object[] results = this.Invoke("allClients", new object[] {
+                        id});
+            return ((System.Data.DataTable)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void allClientsAsync(int id) {
+            this.allClientsAsync(id, null);
+        }
+        
+        /// <remarks/>
+        public void allClientsAsync(int id, object userState) {
+            if ((this.allClientsOperationCompleted == null)) {
+                this.allClientsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnallClientsOperationCompleted);
+            }
+            this.InvokeAsync("allClients", new object[] {
+                        id}, this.allClientsOperationCompleted, userState);
+        }
+        
+        private void OnallClientsOperationCompleted(object arg) {
+            if ((this.allClientsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.allClientsCompleted(this, new allClientsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -338,6 +327,142 @@ namespace WebApplication1.localhost {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/DataReserveId", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataTable DataReserveId(int id, int idRecepcionist) {
+            object[] results = this.Invoke("DataReserveId", new object[] {
+                        id,
+                        idRecepcionist});
+            return ((System.Data.DataTable)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void DataReserveIdAsync(int id, int idRecepcionist) {
+            this.DataReserveIdAsync(id, idRecepcionist, null);
+        }
+        
+        /// <remarks/>
+        public void DataReserveIdAsync(int id, int idRecepcionist, object userState) {
+            if ((this.DataReserveIdOperationCompleted == null)) {
+                this.DataReserveIdOperationCompleted = new System.Threading.SendOrPostCallback(this.OnDataReserveIdOperationCompleted);
+            }
+            this.InvokeAsync("DataReserveId", new object[] {
+                        id,
+                        idRecepcionist}, this.DataReserveIdOperationCompleted, userState);
+        }
+        
+        private void OnDataReserveIdOperationCompleted(object arg) {
+            if ((this.DataReserveIdCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.DataReserveIdCompleted(this, new DataReserveIdCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/addReserve", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataTable addReserve(int idRecepcionist, int idClient, string arrivalDate, string finishDate, string typeRoom) {
+            object[] results = this.Invoke("addReserve", new object[] {
+                        idRecepcionist,
+                        idClient,
+                        arrivalDate,
+                        finishDate,
+                        typeRoom});
+            return ((System.Data.DataTable)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void addReserveAsync(int idRecepcionist, int idClient, string arrivalDate, string finishDate, string typeRoom) {
+            this.addReserveAsync(idRecepcionist, idClient, arrivalDate, finishDate, typeRoom, null);
+        }
+        
+        /// <remarks/>
+        public void addReserveAsync(int idRecepcionist, int idClient, string arrivalDate, string finishDate, string typeRoom, object userState) {
+            if ((this.addReserveOperationCompleted == null)) {
+                this.addReserveOperationCompleted = new System.Threading.SendOrPostCallback(this.OnaddReserveOperationCompleted);
+            }
+            this.InvokeAsync("addReserve", new object[] {
+                        idRecepcionist,
+                        idClient,
+                        arrivalDate,
+                        finishDate,
+                        typeRoom}, this.addReserveOperationCompleted, userState);
+        }
+        
+        private void OnaddReserveOperationCompleted(object arg) {
+            if ((this.addReserveCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.addReserveCompleted(this, new addReserveCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/delReserve", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataTable delReserve(int id) {
+            object[] results = this.Invoke("delReserve", new object[] {
+                        id});
+            return ((System.Data.DataTable)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void delReserveAsync(int id) {
+            this.delReserveAsync(id, null);
+        }
+        
+        /// <remarks/>
+        public void delReserveAsync(int id, object userState) {
+            if ((this.delReserveOperationCompleted == null)) {
+                this.delReserveOperationCompleted = new System.Threading.SendOrPostCallback(this.OndelReserveOperationCompleted);
+            }
+            this.InvokeAsync("delReserve", new object[] {
+                        id}, this.delReserveOperationCompleted, userState);
+        }
+        
+        private void OndelReserveOperationCompleted(object arg) {
+            if ((this.delReserveCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.delReserveCompleted(this, new delReserveCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/updateReserve", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataTable updateReserve(int id, int idRecepcionist, int idClient, string arrivalDate, string finishDate, string typeRoom) {
+            object[] results = this.Invoke("updateReserve", new object[] {
+                        id,
+                        idRecepcionist,
+                        idClient,
+                        arrivalDate,
+                        finishDate,
+                        typeRoom});
+            return ((System.Data.DataTable)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void updateReserveAsync(int id, int idRecepcionist, int idClient, string arrivalDate, string finishDate, string typeRoom) {
+            this.updateReserveAsync(id, idRecepcionist, idClient, arrivalDate, finishDate, typeRoom, null);
+        }
+        
+        /// <remarks/>
+        public void updateReserveAsync(int id, int idRecepcionist, int idClient, string arrivalDate, string finishDate, string typeRoom, object userState) {
+            if ((this.updateReserveOperationCompleted == null)) {
+                this.updateReserveOperationCompleted = new System.Threading.SendOrPostCallback(this.OnupdateReserveOperationCompleted);
+            }
+            this.InvokeAsync("updateReserve", new object[] {
+                        id,
+                        idRecepcionist,
+                        idClient,
+                        arrivalDate,
+                        finishDate,
+                        typeRoom}, this.updateReserveOperationCompleted, userState);
+        }
+        
+        private void OnupdateReserveOperationCompleted(object arg) {
+            if ((this.updateReserveCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.updateReserveCompleted(this, new updateReserveCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -353,36 +478,6 @@ namespace WebApplication1.localhost {
                 return true;
             }
             return false;
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void setIdCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void getIdCompletedEventHandler(object sender, getIdCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class getIdCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal getIdCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public int Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((int)(this.results[0]));
-            }
         }
     }
     
@@ -466,6 +561,32 @@ namespace WebApplication1.localhost {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void allClientsCompletedEventHandler(object sender, allClientsCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class allClientsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal allClientsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataTable Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataTable)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void DataRecepcionistCompletedEventHandler(object sender, DataRecepcionistCompletedEventArgs e);
     
     /// <remarks/>
@@ -529,6 +650,110 @@ namespace WebApplication1.localhost {
         private object[] results;
         
         internal DataReserveCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataTable Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataTable)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void DataReserveIdCompletedEventHandler(object sender, DataReserveIdCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class DataReserveIdCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal DataReserveIdCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataTable Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataTable)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void addReserveCompletedEventHandler(object sender, addReserveCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class addReserveCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal addReserveCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataTable Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataTable)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void delReserveCompletedEventHandler(object sender, delReserveCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class delReserveCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal delReserveCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataTable Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataTable)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void updateReserveCompletedEventHandler(object sender, updateReserveCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class updateReserveCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal updateReserveCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

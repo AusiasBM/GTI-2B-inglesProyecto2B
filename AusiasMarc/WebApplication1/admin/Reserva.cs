@@ -29,7 +29,7 @@ namespace WebApplication1.admin
         override
         public string ToString()
         {
-            return idReserva + " \t" + NameRecepcionist + " \t" + NameClient + " \t" + arrivalDate + " \t" + finishDate + " \t" + typeRoom;
+            return "ID: " + idReserva + "-->" + " \t" + NameRecepcionist + " \t" + NameClient + " \t" + arrivalDate + " \t" + finishDate + " \t" + typeRoom;
         }
 
 
