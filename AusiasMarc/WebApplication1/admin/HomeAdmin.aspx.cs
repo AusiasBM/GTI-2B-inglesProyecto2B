@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.UI;
@@ -207,6 +210,7 @@ namespace WebApplication1.admin
                 {
                     Reserva reserva = new Reserva(dr["id"].ToString(), nameRecepcionist, dr1["name"].ToString(), dr["arrivalDate"].ToString(), dr["finishDate"].ToString(), dr["typeRoom"].ToString());
                     ListBox1.Items.Add(reserva.ToString());
+                    reservas.Add(reserva);
                 }
             }
         }
@@ -302,6 +306,22 @@ namespace WebApplication1.admin
             Session["id"] = null;
             Response.Redirect("../Login.aspx");
             
+        }
+
+        protected void jsonButton_Click(object sender, EventArgs e)
+        {
+            string json = JsonConvert.SerializeObject(reservas);
+
+            try
+            {
+                var dataFile = Server.MapPath("Reserves.json");
+                File.WriteAllText(@dataFile, json);
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
         }
 
         protected void updateListClients()

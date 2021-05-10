@@ -69,6 +69,15 @@ namespace WebApplication1.admin
         protected global::System.Web.UI.WebControls.ListBox ListBox1;
 
         /// <summary>
+        /// Control jsonButton.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button jsonButton;
+
+        /// <summary>
         /// Control idReserveTextBox.
         /// </summary>
         /// <remarks>

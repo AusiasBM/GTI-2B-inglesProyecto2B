@@ -25,6 +25,8 @@
 
             <asp:ListBox ID="ListBox1" runat="server" Height="137px" Width="495px"></asp:ListBox>
         
+            <asp:Button ID="jsonButton" runat="server" OnClick="jsonButton_Click" Text="Export JSON" />
+        
             <hr />
             <br />
         

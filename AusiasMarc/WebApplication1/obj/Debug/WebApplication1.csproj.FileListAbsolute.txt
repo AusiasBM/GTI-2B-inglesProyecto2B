@@ -117,3 +117,5 @@ C:\Users\AusiasBM\Desktop\ingles\AusiasMarc\WebApplication1\obj\Debug\WebApplica
 C:\Users\AusiasBM\Desktop\ingles\AusiasMarc\WebApplication1\obj\Debug\WebApplication1.pdb
 C:\Users\AusiasBM\Desktop\ingles\AusiasMarc\WebApplication1\bin\System.Data.SQLite.dll
 C:\Users\AusiasBM\Desktop\ingles\AusiasMarc\WebApplication1\bin\System.Data.SQLite.xml
+C:\Users\AusiasBM\Desktop\ingles\AusiasMarc\WebApplication1\bin\Newtonsoft.Json.dll
+C:\Users\AusiasBM\Desktop\ingles\AusiasMarc\WebApplication1\bin\Newtonsoft.Json.xml
