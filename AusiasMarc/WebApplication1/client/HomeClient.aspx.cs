@@ -45,9 +45,9 @@ namespace WebApplication1.client
 
             foreach (DataRow dr in dt.Rows)
             {
-                Label1.Text = dr["idn"].ToString();
+                Label1.Text = "User: " + dr["idn"].ToString();
                 nameClient = dr["name"].ToString();
-                Label1.Text += " " + nameClient + " " + dr["surname"].ToString();
+                Label1.Text += " - " + nameClient + " " + dr["surname"].ToString();
             }
 
             dt = ws.DataReserve(Int32.Parse(id), 0);
