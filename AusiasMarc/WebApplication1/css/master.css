@@ -1,2 +1,9 @@
 ﻿body {
+    margin: 0;
+}
+
+footer {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
 }

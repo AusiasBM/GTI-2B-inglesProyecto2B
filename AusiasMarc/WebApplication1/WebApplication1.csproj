@@ -74,7 +74,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="admin\HomeAdmin.aspx" />
+    <Content Include="admin\Index.aspx" />
+    <Content Include="admin\Login.aspx" />
     <Content Include="client\HomeClient.aspx" />
+    <Content Include="client\Index.aspx" />
+    <Content Include="client\Login.aspx" />
     <Content Include="css\master.css" />
     <Content Include="Index.aspx" />
     <Content Include="Login.aspx" />
